@@ -78,7 +78,7 @@ h1 {
 
 .edit-btn, .delete-btn {
     padding: 10px;
-    text-align: right;
+    float: right;
     margin-right: 20px;
     border: none;
     cursor: pointer;
@@ -111,7 +111,7 @@ footer {
     bottom: 0;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: right;
     gap: 10px; /* 버튼 간격 조정 */
 }
 
