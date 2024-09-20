@@ -1,12 +1,22 @@
 const express = require("express");
+const path = require("path");
 const app = express();
-require("dotenv").config();
-
-// 라우트 설정
 const storeRoutes = require("./routes/store");
+require("dotenv").config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// 정적 파일 제공
+app.use(express.static(path.join(__dirname, "public")));
+
+// API 라우트 연결
+app.use("/api", storeRoutes);
+
+// 기본 경로 설정 (index.html 제공)
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 // 정적 파일 제공 (이미지 경로 등)
 app.use("/uploads", express.static("uploads"));
