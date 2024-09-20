@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메모장(장바구니) 화면</title>
+    <link rel="stylesheet" href="../css/cartstyle.css">
+</head>
+<body>
+    <header>
+        <h2>메모장</h2>
+        <button id="add-item">+</button>
+    </header>
+
+    <section class="cart-items">
+        <ul>
+            <li>
+                <input type="checkbox" class="purchase-check">
+                <span class="item-name">사고 싶은 상품명</span>
+                <button class="edit-btn">수정</button>
+                <button class="delete-btn">삭제</button>
+            </li>
+            <!-- 추가적인 아이템은 자바스크립트로 동적으로 추가 가능 -->
+        </ul>
+    </section>
+
+    <footer>
+        <nav>
+            <button>Home</button>
+            <button>메모</button>
+            <button>찜</button>
+            <button>마이페이지</button>
+        </nav>
+    </footer>
+
+    <script>
+        document.getElementById('add-item').addEventListener('click', function() {
+            const itemName = prompt('추가할 상품명을 입력하세요:');
+            if (itemName) {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <input type="checkbox" class="purchase-check">
+                    <span class="item-name">${itemName}</span>
+                    <button class="edit-btn">수정</button>
+                    <button class="delete-btn">삭제</button>
+                `;
+                document.querySelector('.cart-items ul').appendChild(listItem);
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('delete-btn')) {
+                event.target.closest('li').remove();
+            }
+
+            if (event.target.classList.contains('edit-btn')) {
+                const newName = prompt('수정할 상품명을 입력하세요:');
+                if (newName) {
+                    event.target.closest('li').querySelector('.item-name').textContent = newName;
+                }
+            }
+
+            if (event.target.classList.contains('purchase-check')) {
+                const listItem = event.target.closest('li');
+                if (event.target.checked) {
+                    listItem.style.textDecoration = 'line-through';
+                    listItem.style.opacity = '0.5';
+                } else {
+                    listItem.style.textDecoration = 'none';
+                    listItem.style.opacity = '1';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
