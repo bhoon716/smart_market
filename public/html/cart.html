@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,19 +8,18 @@
 </head>
 <body>
     <header>
-        <h2>메모장</h2>
+        <h1>메모장</h1>
         <button id="add-item">+</button>
     </header>
 
     <section class="cart-items">
         <ul>
-            <li>
+            <li class="cart-item">
                 <input type="checkbox" class="purchase-check">
                 <span class="item-name">사고 싶은 상품명</span>
                 <button class="edit-btn">수정</button>
                 <button class="delete-btn">삭제</button>
             </li>
-            <!-- 추가적인 아이템은 자바스크립트로 동적으로 추가 가능 -->
         </ul>
     </section>
 
@@ -39,6 +37,7 @@
             const itemName = prompt('추가할 상품명을 입력하세요:');
             if (itemName) {
                 const listItem = document.createElement('li');
+                listItem.classList.add('cart-item');
                 listItem.innerHTML = `
                     <input type="checkbox" class="purchase-check">
                     <span class="item-name">${itemName}</span>
