@@ -11,7 +11,7 @@ body {
 
 .search-container {
     width: 100%;
-    max-width: 480px;
+    max-width: 350px;
     background-color: white;
     margin: 0 auto;
     padding: 20px;
@@ -27,7 +27,7 @@ body {
     top: 0;
     /*left: 0;  왼쪽으로 완전히 붙이기 위해 추가 */
     width: 100%;
-    max-width: 480px;
+    max-width: 350px;
     z-index: 100;
     box-sizing: border-box; /* 패딩이 포함된 크기를 기준으로 설정 */
 }
@@ -110,7 +110,7 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    max-width: 480px;
+    max-width: 350px;
     background-color: #f0f0f0;
     padding: 10px;
     box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
@@ -125,9 +125,9 @@ footer {
     text-align: center;
 }
 
-@media screen and (min-width: 481px) {
+@media screen and (min-width: 350px) {
     .container {
-        width: 480px;
+        width: 350px;
     }
 
     footer {
