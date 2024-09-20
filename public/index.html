@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>메인 페이지</title>
-    <link rel="stylesheet" href="css\mainStyle.css" />
+    <link rel="stylesheet" href="public/css/mainStyle.css" />
   </head>
   <body>
     <div class="container">
@@ -72,7 +72,7 @@
 
           // 클릭 시 가게 상세 페이지로 이동
           storeItem.addEventListener("click", () => {
-            window.location.href = `/store.html?storeId=${store.id}`;
+            window.location.href = `/html/store.html?storeId=${store.id}`;
           });
 
           storeList.appendChild(storeItem);
