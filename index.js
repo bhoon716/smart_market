@@ -1,17 +1,24 @@
-const express = require('express');
-const bcrypt = require('bcrypt');  // 비밀번호 암호화
-require('dotenv').config(); // 환경변수 설정
-const connection = require('./config/db'); // DB 연결 파일
-const vendorRoutes = require('./routes/vendor'); // 상인 관련 라우트
-
+const express = require("express");
 const app = express();
+require("dotenv").config();
+
+// 라우트 설정
+const storeRoutes = require("./routes/store");
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// 상인 라우트 연결
-app.use('/api/vendors', vendorRoutes);
+// 정적 파일 제공 (이미지 경로 등)
+app.use("/uploads", express.static("uploads"));
+
+// 기본 라우트
+app.use("/api/store", storeRoutes);
+app.use(express.static("public"));
+
+app.get("/", (req, res) => {
+  res.send("스마트 전통시장 서버가 작동 중입니다!");
+});
 
 // 회원가입 라우트
 app.post('/register', async (req, res) => {
