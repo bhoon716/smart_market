@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>내 매장</title>
+    <link rel="stylesheet" href="../css/regimagestyle.css">
+</head>
+<body>
+    <div class="store-container">
+        <h2>내 매장</h2>
+
+        <div class="image-section">
+            <div class="upload-button">
+                <button class="large-btn">사진 업로드</button>
+            </div>
+            <div class="uploaded-image">
+                <p>업로드한 사진 뜨는 곳</p>
+            </div>
+        </div>
+
+        <div class="product-list">
+            <h3>판매 목록</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>상품명</th>
+                        <th>상품 가격</th>
+                        <th>삭제</th>
+                    </tr>
+                </thead>
+                <tbody id="product-list">
+                    <tr>
+                        <td contenteditable="true">상품명</td>
+                        <td contenteditable="true">상품 가격</td>
+                        <td><button class="delete-btn">삭제</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="control-buttons">
+            <button id="add-row-btn" class="large-btn">칸 추가</button>
+            <button class="large-btn">저장</button>
+        </div>
+    </div>
+
+    <footer>
+        <nav>
+            <button>홈버튼</button>
+            <button>메모</button>
+            <button>찜</button>
+            <button>마이페이지</button>
+        </nav>
+    </footer>
+
+    <script>
+        // '칸 추가' 버튼 클릭 시 새로운 상품 목록 추가
+        document.getElementById('add-row-btn').addEventListener('click', function() {
+            const productList = document.getElementById('product-list');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td contenteditable="true">상품명</td>
+                <td contenteditable="true">상품 가격</td>
+                <td><button class="delete-btn">삭제</button></td>
+            `;
+
+            productList.appendChild(newRow);
+        });
+
+        // 삭제 버튼 기능 구현
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('delete-btn')) {
+                event.target.closest('tr').remove();
+            }
+        });
+    </script>
+</body>
+</html>
