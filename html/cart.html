@@ -8,19 +8,18 @@
 </head>
 <body>
     <header>
-        <h2>메모장</h2>
-        <button id="add-item">물건 추가</button>
+        <h1>메모장</h1>
+        <button id="add-item">+</button>
     </header>
 
     <section class="cart-items">
         <ul>
-            <li>
+            <li class="cart-item">
                 <input type="checkbox" class="purchase-check">
                 <a href="map.html" class="item-name">사고 싶은 상품명</a> <!-- 클릭 시 map.html로 이동 -->
                 <button class="edit-btn">수정</button>
                 <button class="delete-btn">삭제</button>
             </li>
-            <!-- 추가적인 아이템은 자바스크립트로 동적으로 추가 가능 -->
         </ul>
     </section>
 
@@ -38,6 +37,7 @@
             const itemName = prompt('추가할 상품명을 입력하세요:');
             if (itemName) {
                 const listItem = document.createElement('li');
+                listItem.classList.add('cart-item');
                 listItem.innerHTML = `
                     <input type="checkbox" class="purchase-check">
                     <a href="map.html" class="item-name">${itemName}</a> <!-- 새로 추가된 항목도 map.html로 이동 -->
