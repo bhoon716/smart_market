@@ -16,7 +16,7 @@
         <ul>
             <li>
                 <input type="checkbox" class="purchase-check">
-                <span class="item-name">사고 싶은 상품명</span>
+                <a href="map.html" class="item-name">사고 싶은 상품명</a> <!-- 클릭 시 map.html로 이동 -->
                 <button class="edit-btn">수정</button>
                 <button class="delete-btn">삭제</button>
             </li>
@@ -40,7 +40,7 @@
                 const listItem = document.createElement('li');
                 listItem.innerHTML = `
                     <input type="checkbox" class="purchase-check">
-                    <span class="item-name">${itemName}</span>
+                    <a href="map.html" class="item-name">${itemName}</a> <!-- 새로 추가된 항목도 map.html로 이동 -->
                     <button class="edit-btn">수정</button>
                     <button class="delete-btn">삭제</button>
                 `;
