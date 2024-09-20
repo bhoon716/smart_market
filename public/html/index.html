@@ -11,10 +11,17 @@
       <header>
         <div class="app-info">
           <div class="app-icon">
-            <img src="../uploads/image.png" alt="Smarket logo" class="app-logo" \width = "30px", height="30px" />
+            <img
+              src="../uploads/image.png"
+              alt="Smarket logo"
+              class="app-logo"
+              \width="30px"
+              ,
+              height="30px"
+            />
             Smarket
           </div>
-          
+
           <button class="search-btn" onclick="location.href='search.html'">
             검색하기
           </button>
@@ -39,7 +46,9 @@
         <button onclick="location.href='main.html'">Home</button>
         <button onclick="location.href='list.html'">리스트</button>
         <button onclick="location.href='favorites.html'">찜</button>
-        <button onclick="location.href='mypage.html'">MyPage</button>
+        <button id="mypageBtn" onclick="location.href='mypage.html'">
+          MyPage
+        </button>
       </div>
     </footer>
 
@@ -86,7 +95,13 @@
 
       // 페이지 로드 시 가게 리스트 불러오기
       window.onload = fetchStores;
+
+      // 버튼 클릭 시 login.html로 이동하는 코드
+      document
+        .getElementById("mypageBtn")
+        .addEventListener("click", function () {
+          window.location.href = "/html/login.html"; // login.html로 이동
+        });
     </script>
   </body>
 </html>
-
