@@ -8,7 +8,16 @@
   </head>
   <body>
     <div class="store-container">
-      <h2>내 매장</h2>
+      <!-- 상단 뒤로가기 및 제목 -->
+      <header>
+        <button
+          class="back-btn"
+          onclick="window.location.href = '/html/mypage.html'"
+        >
+          &larr;
+        </button>
+        <h2>나의 매장</h2>
+      </header>
 
       <div class="image-section">
         <form id="upload-form" enctype="multipart/form-data">
@@ -45,15 +54,6 @@
         <button id="save-btn" class="large-btn">저장</button>
       </div>
     </div>
-
-    <footer>
-      <nav>
-        <button>홈</button>
-        <button>메모</button>
-        <button>찜</button>
-        <button>내정보</button>
-      </nav>
-    </footer>
 
     <script>
       // '칸 추가' 버튼 클릭 시 새로운 상품 목록 추가
@@ -117,8 +117,8 @@
         const rows = csv.trim().split("\n");
         const productList = document.getElementById("product-list");
 
-        // 첫 번째 행은 헤더이므로 무시하고 나머지를 처리
-        for (let i = 1; i < rows.length; i++) {
+        // 1, 2, -1 행은 헤더이므로 무시하고 나머지를 처리
+        for (let i = 2; i < rows.length - 1; i++) {
           const [itemName, price] = rows[i].split(",");
 
           const newRow = document.createElement("tr");

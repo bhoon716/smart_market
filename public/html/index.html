@@ -43,11 +43,10 @@
 
     <footer>
       <div class="nav-bar">
-        <button onclick="location.href='main.html'">Home</button>
-        <button onclick="location.href='list.html'">리스트</button>
-        <button onclick="location.href='favorites.html'">찜</button>
+        <button onclick="location.href='list.html'">쇼핑목록</button>
+        <button id="homeBtn" onclick="location.href='main.html'">홈</button>
         <button id="mypageBtn" onclick="location.href='mypage.html'">
-          MyPage
+          마이페이지
         </button>
       </div>
     </footer>
@@ -102,6 +101,10 @@
         .addEventListener("click", function () {
           window.location.href = "/html/login.html"; // login.html로 이동
         });
+
+      document.getElementById("homeBtn").addEventListener("click", function () {
+        window.location.href = "/"; // login.html로 이동
+      });
     </script>
   </body>
 </html>
