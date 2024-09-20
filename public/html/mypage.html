@@ -20,16 +20,40 @@
                 <img src="../img/profile-icon.png" alt="프로필 이미지" class="profile-img">
                 <button class="login-btn">로그인을 해주세요</button>
             </div>
-            <button class="store-manage-btn">내 매장 관리하기 &rarr;</button>
+            <button class="store-manage-btn" onclick="location.href='regimage.html'">내 매장 관리하기</button>
         </div>
 
         <!-- 메뉴 리스트 -->
+        <style>
+            .menu-list {
+                width: 100%; /* Ensure the menu list takes up full width */
+            }
+        
+            .menu-item {
+                display: flex;
+                justify-content: space-between;
+                width: 100%; /* Make each menu item span the full width */
+                border: none;
+                background: none;
+                padding: 10px;
+                font-size: 16px;
+                cursor: pointer;
+                text-align: left;
+            }
+        
+            .menu-item::after {
+                content: '→'; /* Add the right arrow */
+                margin-left: auto; /* Push the arrow to the far right */
+            }
+        </style>
+        
         <div class="menu-list">
-            <button class="menu-item">공지사항 &rarr;</button>
-            <button class="menu-item">QnA &rarr;</button>
-            <button class="menu-item">설정 &rarr;</button>
-            <button class="menu-item">로그아웃 &rarr;</button>
+            <button class="menu-item">공지사항</button>
+            <button class="menu-item">QnA</button>
+            <button class="menu-item">설정</button>
+            <button class="menu-item">로그아웃</button>
         </div>
+        
     </div>
 
     <footer>
