@@ -15,7 +15,7 @@ body {
 
 .container {
     width: 100%;
-    max-width: 480px;
+    max-width: 350px;
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -28,8 +28,8 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    max-width: 480px;
-    background-color: #80d4ff;
+    max-width: 350px;
+    background-color: #f0f0f0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -129,8 +129,9 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    max-width: 480px;
-    background-color: #76d6ff;
+    max-width: 350px;
+    background-color: #f0f0f0;
+    padding: 10px;
     box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -149,9 +150,9 @@ footer {
     text-align: center;
 }
 
-@media screen and (min-width: 481px) {
+@media screen and (min-width: 350px) {
     .container {
-        width: 480px;
+        width: 350px;
     }
 
     header, footer {
