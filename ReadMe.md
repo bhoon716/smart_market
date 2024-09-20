@@ -59,6 +59,8 @@
    : Long id | String store_name | String category | String mainPicturePath| String location | TIME open_time | TIME close_time
 2. menu(판매 물품 정보)
    : Long id | \*Long store_id | String item_name | Integer price | String unit | String itemPicturePath
+3. member(유저)
+   : Long id | String username | String password
 
 ### 만들어야 하는 페이지와 기능
 
