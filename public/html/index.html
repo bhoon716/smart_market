@@ -10,7 +10,11 @@
     <div class="container">
       <header>
         <div class="app-info">
-          <div class="app-icon">앱아이콘 및 이름</div>
+          <div class="app-icon">
+            <img src="../uploads/image.png" alt="Smarket logo" class="app-logo" \width = "30px", height="30px" />
+            Smarket
+          </div>
+          
           <button class="search-btn" onclick="location.href='search.html'">
             검색하기
           </button>
@@ -64,6 +68,7 @@
           storeItem.classList.add("store-item");
           storeItem.innerHTML = `
         <img src="${store.mainPicturePath}" alt="${store.store_name}">
+        
         <h2>${store.store_name}</h2>
         <p>${store.category}</p>
         <p>${store.location}</p>
@@ -84,3 +89,4 @@
     </script>
   </body>
 </html>
+
