@@ -1,86 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>메인 페이지</title>
-    <link rel="stylesheet" href="../css/mainStyle.css" />
+    <title>스마트 전통시장</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 20px;
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      .link-container {
+        text-align: center;
+        margin-top: 50px;
+      }
+      a {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 18px;
+      }
+      a:hover {
+        background-color: #45a049;
+      }
+    </style>
   </head>
   <body>
-    <div class="container">
-      <header>
-        <div class="app-info">
-          <div class="app-icon">앱아이콘 및 이름</div>
-          <button class="search-btn" onclick="location.href='search.html'">
-            검색하기
-          </button>
-        </div>
-      </header>
+    <h1>스마트 전통시장</h1>
 
-      <div class="banner">
-        <button class="banner-btn" onclick="location.href='ad.html'">
-          광고 배너
-        </button>
-      </div>
-
-      <section class="recommended">
-        <h2>추천 가게</h2>
-        <div class="store-list" id="store-list">
-          <!-- 가게 리스트가 여기에 동적으로 표시됩니다 -->
-        </div>
-
-        <script>
-          // 가게 리스트 API 요청
-          async function fetchStores() {
-            try {
-              const response = await fetch("/api/stores");
-              const stores = await response.json();
-              displayStores(stores);
-            } catch (error) {
-              console.error("가게 리스트를 불러오는 중 오류 발생:", error);
-            }
-          }
-
-          // 가게 리스트를 화면에 표시
-          function displayStores(stores) {
-            const storeList = document.getElementById("store-list");
-            storeList.innerHTML = ""; // 초기화
-
-            stores.forEach((store) => {
-              const storeItem = document.createElement("div");
-              storeItem.classList.add("store-item");
-              storeItem.setAttribute("data-store-id", store.id);
-
-              storeItem.innerHTML = `
-                            <img src="${store.mainPicturePath}" alt="${store.store_name}">
-                            <h2>${store.store_name}</h2>
-                            <p>${store.category}</p>
-                            <p>${store.location}</p>
-                            <p>영업시간: ${store.open_time} ~ ${store.close_time}</p>
-                        `;
-
-              // 클릭 이벤트로 해당 가게 정보 페이지로 이동
-              storeItem.addEventListener("click", () => {
-                window.location.href = `/store.html?storeId=${store.id}`;
-              });
-
-              storeList.appendChild(storeItem);
-            });
-          }
-
-          // 페이지 로드 시 가게 리스트 불러오기
-          window.onload = fetchStores;
-        </script>
-      </section>
+    <div class="link-container">
+      <a href="upload.html">이미지 업로드 페이지로 이동</a>
     </div>
-
-    <footer>
-      <div class="nav-bar">
-        <button onclick="location.href='main.html'">Home</button>
-        <button onclick="location.href='list.html'">리스트</button>
-        <button onclick="location.href='favorites.html'">찜</button>
-        <button onclick="location.href='mypage.html'">MyPage</button>
-      </div>
-    </footer>
   </body>
 </html>

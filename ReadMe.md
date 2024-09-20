@@ -59,7 +59,7 @@
 1. store(상점)
    : Long id | String store_name | String category | String mainPicturePath| String location | TIME open_time | TIME close_time
 2. menu(판매 물품 정보)
-   : Long id | \*Long store_id | String item_name | Integer price | String unit | String itemPicturePath
+   : Long id | \*Long store_id | String item_name | Integer price | String itemPicturePath
 3. member(유저)
    : Long id | String username | String password | String role
 

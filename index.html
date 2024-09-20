@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>메인 페이지</title>
+    <link rel="stylesheet" href="css\mainStyle.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="app-info">
+          <div class="app-icon">앱아이콘 및 이름</div>
+          <button class="search-btn" onclick="location.href='search.html'">
+            검색하기
+          </button>
+        </div>
+      </header>
+
+      <div class="banner">
+        <button class="banner-btn" onclick="location.href='ad.html'">
+          광고 배너
+        </button>
+      </div>
+
+      <h1>추천 가게</h1>
+
+      <div class="store-list" id="store-list">
+        <!-- 가게 리스트가 동적으로 여기에 표시됩니다 -->
+      </div>
+    </div>
+
+    <footer>
+      <div class="nav-bar">
+        <button onclick="location.href='main.html'">Home</button>
+        <button onclick="location.href='list.html'">리스트</button>
+        <button onclick="location.href='favorites.html'">찜</button>
+        <button onclick="location.href='mypage.html'">MyPage</button>
+      </div>
+    </footer>
+
+    <script>
+      // 가게 리스트 불러오기
+      async function fetchStores() {
+        try {
+          const response = await fetch("/api/stores"); // API 호출
+          if (!response.ok) {
+            throw new Error("가게 리스트를 불러오는 중 문제가 발생했습니다.");
+          }
+          const stores = await response.json(); // JSON 데이터로 변환
+          displayStores(stores);
+        } catch (error) {
+          console.error("가게 리스트 불러오기 실패:", error);
+        }
+      }
+
+      // 가게 리스트를 화면에 표시하는 함수
+      function displayStores(stores) {
+        const storeList = document.getElementById("store-list");
+        storeList.innerHTML = ""; // 기존 내용 초기화
+
+        stores.forEach((store) => {
+          const storeItem = document.createElement("div");
+          storeItem.classList.add("store-item");
+          storeItem.innerHTML = `
+        <img src="${store.mainPicturePath}" alt="${store.store_name}">
+        <h2>${store.store_name}</h2>
+        <p>${store.category}</p>
+        <p>${store.location}</p>
+        <p>영업시간: ${store.open_time} ~ ${store.close_time}</p>
+      `;
+
+          // 클릭 시 가게 상세 페이지로 이동
+          storeItem.addEventListener("click", () => {
+            window.location.href = `/store.html?storeId=${store.id}`;
+          });
+
+          storeList.appendChild(storeItem);
+        });
+      }
+
+      // 페이지 로드 시 가게 리스트 불러오기
+      window.onload = fetchStores;
+    </script>
+  </body>
+</html>
