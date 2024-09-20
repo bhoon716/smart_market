@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>가게 정보</title>
+    <link rel="stylesheet" href="css\storeStyle.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="app-info">
+          <div class="app-icon">앱아이콘 및 이름</div>
+          <button class="back-btn" onclick="history.back()">뒤로가기</button>
+        </div>
+      </header>
+
+      <div class="store-details" id="store-details">
+        <!-- 가게 정보가 동적으로 여기에 표시됩니다 -->
+      </div>
+    </div>
+
+    <footer>
+      <div class="nav-bar">
+        <button onclick="location.href='main.html'">Home</button>
+        <button onclick="location.href='list.html'">리스트</button>
+        <button onclick="location.href='favorites.html'">찜</button>
+        <button onclick="location.href='mypage.html'">MyPage</button>
+      </div>
+    </footer>
+
+    <script>
+      // URL에서 storeId 가져오기
+      function getStoreIdFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get("storeId");
+      }
+
+      // 가게 정보를 불러오는 함수
+      async function fetchStoreDetails(storeId) {
+        try {
+          const response = await fetch(`/api/stores/${storeId}`); // API 호출
+          if (!response.ok) {
+            throw new Error("가게 정보를 불러오는 중 문제가 발생했습니다.");
+          }
+          const store = await response.json(); // JSON 데이터로 변환
+          displayStoreDetails(store);
+        } catch (error) {
+          console.error("가게 정보 불러오기 실패:", error);
+        }
+      }
+
+      // 가게 정보를 화면에 표시하는 함수
+      function displayStoreDetails(store) {
+        const storeDetails = document.getElementById("store-details");
+        storeDetails.innerHTML = `
+          <img src="${store.mainPicturePath}" alt="${store.store_name}">
+          <h1>${store.store_name}</h1>
+          <p>카테고리: ${store.category}</p>
+          <p>위치: ${store.location}</p>
+          <p>영업시간: ${store.open_time} ~ ${store.close_time}</p>
+          <h2>판매 물품</h2>
+          <ul id="menu-list">
+            <!-- 메뉴 리스트가 여기에 표시됩니다 -->
+          </ul>
+        `;
+
+        // 가게의 판매 물품을 불러오기
+        fetchStoreMenu(store.id);
+      }
+
+      // 가게 판매 물품을 불러오는 함수
+      async function fetchStoreMenu(storeId) {
+        try {
+          const response = await fetch(`/api/stores/${storeId}/menu`); // 메뉴 API 호출
+          if (!response.ok) {
+            throw new Error(
+              "가게 판매 물품을 불러오는 중 문제가 발생했습니다."
+            );
+          }
+          const menuItems = await response.json(); // JSON 데이터로 변환
+          displayStoreMenu(menuItems);
+        } catch (error) {
+          console.error("판매 물품 불러오기 실패:", error);
+        }
+      }
+
+      // 판매 물품을 화면에 표시하는 함수
+      function displayStoreMenu(menuItems) {
+        const menuList = document.getElementById("menu-list");
+        menuList.innerHTML = ""; // 기존 내용 초기화
+
+        menuItems.forEach((item) => {
+          const menuItem = document.createElement("li");
+          menuItem.innerHTML = `
+            <img src="${item.itemPicturePath}" alt="${item.item_name}">
+            <p>${item.item_name} - ${item.price}원</p>
+          `;
+          menuList.appendChild(menuItem);
+        });
+      }
+
+      // 페이지 로드 시 가게 정보와 메뉴 불러오기
+      const storeId = getStoreIdFromUrl();
+      if (storeId) {
+        fetchStoreDetails(storeId);
+      } else {
+        console.error("storeId가 제공되지 않았습니다.");
+      }
+    </script>
+  </body>
+</html>
