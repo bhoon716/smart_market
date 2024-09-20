@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>가게 정보</title>
     <link rel="stylesheet" href="../css/storetemplitstyle.css">
+    <script>
+        // Toggle heart button
+        function toggleHeart(btn) {
+            btn.classList.toggle('active');
+        }
+    </script>
 </head>
 <body>
     <div class="store-container">
@@ -15,6 +21,7 @@
 
         <div class="store-info">
             <h1 class="store-name">가게 이름</h1>
+            <button class="heart-btn" onclick="toggleHeart(this)">♥</button> <!-- Heart button -->
             <div class="store-rating">
                 <span>★ 평점 | 리뷰 개수</span>
             </div>
@@ -29,11 +36,20 @@
         <div class="menu-section">
             <h2>메뉴 및 가격</h2>
             <ul class="menu-list">
-                <li>메뉴1 - 메뉴1 가격</li>
-                <li>메뉴2 - 메뉴2 가격</li>
-                <li>메뉴3 - 메뉴3 가격</li>
+                <li class="menu-item">메뉴1 - 메뉴1 가격</li>
+                <li class="menu-item">메뉴2 - 메뉴2 가격</li>
+                <li class="menu-item">메뉴3 - 메뉴3 가격</li>
             </ul>
         </div>
+
+        <footer>
+            <div class="nav-bar">
+                <button onclick="location.href='home.html'">홈</button>
+                <button onclick="location.href='cart.html'">메모</button>
+                <button onclick="location.href='wishlist.html'">찜</button>
+                <button onclick="location.href='mypage.html'">내정보</button>
+            </div>
+        </footer>
     </div>
 </body>
 </html>
