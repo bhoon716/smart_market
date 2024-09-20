@@ -90,7 +90,7 @@ h1 {
 }
 
 .edit-btn {
-    margin-right: 5px; /* 상품명과 수정 버튼 사이 간격 */
+    margin-right: 50px; /* 상품명과 수정 버튼 사이 간격 */
 }
 
 .delete-btn {
@@ -111,7 +111,7 @@ footer {
     bottom: 0;
     width: 100%;
     display: flex;
-    justify-content: right;
+    justify-content: center;
     gap: 10px; /* 버튼 간격 조정 */
 }
 

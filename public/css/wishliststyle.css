@@ -51,7 +51,25 @@ h2 {
     background-color: #ddd;
     height: 100px;
     margin-bottom: 10px;
+
 }
+.app-icon {
+    display: flex; /* 텍스트와 로고를 나란히 배치 */
+    align-items: center; /* 로고와 텍스트의 세로 정렬을 맞춤 */
+  }
+  
+  .app-logo {
+    width: 40px; /* 로고의 너비 설정 (필요에 따라 조정) */
+    height: 40px; /* 로고의 높이 설정 */
+    margin-right: 10px; /* 로고와 텍스트 사이의 간격 */
+  }
+  
+  .search-btn {
+    height: 40px; /* 로고와 검색 버튼의 높이를 맞추기 */
+    display: flex;
+    align-items: center; /* 버튼 안의 텍스트 중앙 정렬 */
+  }
+  
 
 footer {
     position: fixed;
