@@ -1,73 +1,62 @@
-const fs = require('fs');
-const path = require('path');
-const axios = require('axios');
-const db = require('../config/db');
+const fs = require("fs");
+const path = require("path");
+const OpenAI = require("openai");
+require("dotenv").config();
 
-require('dotenv').config();
-
-// GPT API 설정
-const GPT_API_URL = 'https://api.openai.com/v1/images/analyze'; // GPT 4o-mini API URL
-const GPT_API_KEY = process.env.GPT_API_KEY; // .env 파일에 API 키 저장
+// OpenAI API 설정
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 // 이미지 분석 함수
-exports.analyzeImage = async (req, res) => {
-  const imagePath = req.file.path;
+async function analyzeImage(req, res) {
+  const imagePath = path.join(__dirname, "../uploads/", req.file.filename);
 
   try {
-    // 이미지를 읽어서 GPT API로 전송
-    const image = fs.readFileSync(imagePath);
-    const response = await axios.post(
-      GPT_API_URL,
-      {
-        image: image.toString('base64'), // 이미지를 Base64로 인코딩하여 전송
-      },
-      {
-        headers: {
-          'Authorization': `Bearer ${GPT_API_KEY}`,
-          'Content-Type': 'application/json',
-        }
-      }
-    );
+    // 이미지를 읽어 Base64로 인코딩
+    const image = fs.readFileSync(imagePath, { encoding: "base64" });
 
-    const result = response.data;
-
-    // GPT API 결과에서 상품명, 가격, 단위 추출 (예시로 응답 파싱)
-    const items = parseGPTResult(result);
-
-    // 각 상품 정보를 DB에 저장 (상품명, 가격, 단위, 이미지 경로)
-    items.forEach(item => {
-      const query = `INSERT INTO items (item_name, price, unit, itemPicturePath) VALUES (?, ?, ?, ?)`;
-      db.query(query, [item.name, item.price, item.unit, imagePath], (err, result) => {
-        if (err) {
-          console.error('DB 저장 오류:', err);
-          return res.status(500).json({ error: err.message });
-        }
-      });
+    // GPT API에 요청
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "system",
+          content:
+            "너는 한국의 전통시장 도우미야. 전통시장 도우미는 상인들이 본인 가게의 물건 판매대나 가게의 메뉴판 사진을 찍어서 올리면 해당 사진을 분석해서 어떤 물건이 있는지 데이터 형식으로 출력해야돼. 데이터 형식은 csv 형식으로 출력하고, 속성으로는 String itemName, Int Price으로 설정해서 출력해줘. 너의 응답을 그대로 DB에 저장해야하니까 데이터 외의 말은 하지마. 물건의 가격이 적혀있지 않을 수도 있어. 가격이 적혀있지 않으면 0 으로 표기해줘. 돈의 단위는 작성하지 말고 오로지 숫자만 적어줘.",
+        },
+        {
+          role: "user",
+          content: [
+            {
+              type: "text",
+              text: "이 사진을 분석해서 해당 가게에 무엇을 파는지 분석해줘. 설정한 데이터 형식을 꼭 지켜야돼.",
+            },
+            {
+              type: "image_url",
+              image_url: {
+                url: `data:image/jpeg;base64,${image}`,
+              },
+            },
+          ],
+        },
+      ],
+      temperature: 0.1,
+      max_tokens: 2048,
+      top_p: 1,
+      frequency_penalty: 0,
+      presence_penalty: 0,
     });
 
-    res.status(200).json({ message: '이미지 분석 및 상품 정보 저장 완료', items });
+    const result = response.choices[0].message.content; // GPT API 응답
+    console.log("GPT API 분석 결과 (CSV):\n", result);
+
+    // 클라이언트에게 CSV 형식 결과 반환
+    res.status(200).json({ message: "이미지 분석 성공", result });
   } catch (error) {
-    console.error('이미지 분석 오류:', error);
-    res.status(500).json({ error: '이미지 분석 실패' });
+    console.error("이미지 분석 중 오류 발생:", error);
+    res.status(500).json({ error: "이미지 분석 실패" });
   }
-};
-
-// GPT API 응답 파싱 함수 (예시)
-function parseGPTResult(result) {
-  // GPT 응답에서 필요한 데이터를 추출하는 로직
-  const items = [];
-
-  result.forEach(itemData => {
-    const name = itemData.name; // 상품명
-    const price = itemData.price; // 가격
-    const unit = itemData.unit; // 단위
-
-    items.push({
-      name: name,
-      price: parseInt(price),
-      unit: unit,
-    });
-  });
-
-  return items;
 }
+
+module.exports = { analyzeImage };

@@ -52,6 +52,7 @@
 
 - npm install express mysql2 dotenv
 - npm install multer
+- npm install axios
 
 ### DB 테이블 설계
 

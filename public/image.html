@@ -72,17 +72,17 @@
 
         form.addEventListener('submit', async function (event) {
             event.preventDefault();
-
+        
             const formData = new FormData();
             const imageInput = document.getElementById('image');
             formData.append('image', imageInput.files[0]);
-
+        
             try {
-                const response = await fetch('/api/store/upload', {
+                const response = await fetch('/api/stores/upload', { // 라우트가 올바르게 설정되었는지 확인
                     method: 'POST',
-                    body: formData
+                    body: formData // Content-Type 헤더는 자동으로 설정됩니다
                 });
-                
+        
                 if (response.ok) {
                     const data = await response.json();
                     displayResults(data.items);
@@ -93,6 +93,7 @@
                 console.error('Error:', error);
             }
         });
+        
 
         function displayResults(items) {
             resultsDiv.innerHTML = ''; // 기존 결과 초기화

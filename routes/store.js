@@ -1,19 +1,21 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const storeController = require('../controllers/storeController');
+const multer = require("multer");
+const storeController = require("../controllers/storeController");
 
+// 이미지 업로드 설정
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, 'uploads/'); // 이미지를 uploads 폴더에 저장
-    },
-    filename: (req, file, cb) => {
-      cb(null, Date.now() + '-' + file.originalname); // 파일 이름을 유니크하게 생성
-    }
-  });
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
 
-  const upload = multer({ storage: storage });
+const upload = multer({ storage: storage });
 
 // 이미지 업로드 및 분석 라우트
-router.post('/upload', upload.single('image'), storeController.analyzeImage);
+router.post("/upload", upload.single("image"), storeController.analyzeImage);
 
 module.exports = router;
