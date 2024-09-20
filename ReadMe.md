@@ -56,7 +56,7 @@
 ### DB 테이블 설계
 
 1. store(상인)
-   : Long id | String store_name | String category | String mainPicturePath| String location | TIME open_time | TIME close_time | bool isOpened
+   : Long id | String store_name | String category | String mainPicturePath| String location | TIME open_time | TIME close_time
 2. menu(판매 물품 정보)
    : Long id | \*Long store_id | String item_name | Integer price | String unit | String itemPicturePath
 
