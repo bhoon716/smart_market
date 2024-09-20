@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;  /* 화면 중앙에 정렬 */
+    align-items: flex-start;   /* 상단에 맞추어 정렬 */
+    min-height: 100vh;
+}
+
+.search-container {
+    width: 100%;
+    max-width: 480px;
+    background-color: white;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+    position: fixed;
+    top: 0;
+    /*left: 0;  왼쪽으로 완전히 붙이기 위해 추가 */
+    width: 100%;
+    max-width: 480px;
+    z-index: 100;
+    box-sizing: border-box; /* 패딩이 포함된 크기를 기준으로 설정 */
+}
+
+.back-btn {
+    margin-left: 0;
+    padding-left: 0;
+    padding-right: 10px; /* 여백을 조절하여 화살표 크기 유지 */
+}
+
+.search-input {
+    flex: 1;
+    padding: 10px;
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+
+.search-icon, .back-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.search-results {
+    margin-top: 60px; /* 검색 바와 겹치지 않게 여백 추가 */
+    text-align: center; /* 검색 결과 영역 중앙 정렬 */
+}
+
+.recent-stores, .recommended-search {
+    margin-bottom: 20px;
+}
+
+.keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center; /* 추천 검색어 중앙 정렬 */
+}
+
+.keywords button {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+.store {
+    display: flex;
+    justify-content: flex-start; /* 최근 본 가게 리스트 내부 정렬 */
+    align-items: center;
+    background-color: #eee; /* 박스 배경색 */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px; /* 박스 모서리 둥글게 */
+}
+
+.store img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.store-info p {
+    margin: 0;
+    text-align: left; /* 가게 정보 왼쪽 정렬 */
+}

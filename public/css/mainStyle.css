@@ -1,0 +1,149 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 480px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    margin-bottom: 60px;
+}
+
+/* 상단 고정 헤더 */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    max-width: 480px;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    z-index: 100;
+}
+
+.app-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.app-icon {
+    flex: 1;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.search-btn {
+    padding: 10px;
+    background-color: #ddd;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/* 광고 배너 크기 조정 */
+.banner {
+    height: 150px; /* 세로 길이를 약간 더 늘림 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+}
+
+.banner-btn {
+    width: 100%;
+    height: 100%;
+    background-color: #ccc;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.recommended {
+    padding: 10px;
+    overflow-y: auto;
+    flex-grow: 1;
+    text-align: center;
+    margin-bottom: 20px; /* 추천 가게 밑에 여백 추가 */
+}
+
+.store {
+    display: flex;
+    margin-bottom: 10px;
+    background-color: #eee;
+    padding: 10px;
+}
+
+.store-img {
+    flex: 1;
+    background-color: #ddd;
+    border: none;
+    height: 100px;
+    cursor: pointer;
+}
+
+.store-info {
+    flex: 2;
+    padding-left: 10px;
+}
+
+.details {
+    background-color: #ddd;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+}
+
+/* 하단 고정 네비게이션 바 */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 480px;
+    background-color: #f0f0f0;
+    padding: 10px;
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.nav-bar button {
+    flex: 1;
+    padding: 10px;
+    background-color: #ddd;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+@media screen and (min-width: 481px) {
+    .container {
+        width: 480px;
+    }
+
+    header, footer {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
